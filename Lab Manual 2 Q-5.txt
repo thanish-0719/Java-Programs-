@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String customer = sc.nextLine();
+        String feedback = sc.nextLine();
+        String keyword = sc.nextLine();
+
+        // Validate feedback
+        if (feedback.isEmpty()) {
+            System.out.println("Invalid Feedback Message");
+            return;
+        }
+
+        if (feedback.length() > 500) {
+            System.out.println("Feedback Exceeds Maximum Length");
+            return;
+        }
+
+        // Character count
+        int characters = feedback.length();
+
+        // Word count
+        String[] words = feedback.trim().split(" +");
+        int wordCount = words.length;
+
+        // Keyword occurrence count
+        String text = feedback.toLowerCase();
+        String key = keyword.toLowerCase();
+
+        int count = 0;
+        int index = 0;
+
+        while ((index = text.indexOf(key, index)) != -1) {
+            count++;
+            index += key.length();
+        }
+
+        // Display output
+        System.out.println("Customer: " + customer);
+        System.out.println("Characters = " + characters);
+        System.out.println("Words = " + wordCount);
+
+        if (count > 0) {
+            System.out.println("Keyword Found = " + count);
+        } else {
+            System.out.println("Keyword Not Found");
+        }
+    }
+}
